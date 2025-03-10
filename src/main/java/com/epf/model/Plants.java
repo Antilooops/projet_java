@@ -1,6 +1,6 @@
 package com.epf.model;
 
-public class Plant {
+public class Plants {
     private int id;
     private String name;
     private int healthPoints;
@@ -11,7 +11,10 @@ public class Plant {
     private Effects effect;
     private String imagePath;
 
-    public Plant(int id, String name, int healthPoints, float attackPerSecond, int attackDamage, int price,
+    public Plants() {
+    }
+
+    public Plants(int id, String name, int healthPoints, float attackPerSecond, int attackDamage, int price,
                     float sunPerSecond, Effects effect, String imagePath) {
         this.id = id;
         this.name = name;
