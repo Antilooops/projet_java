@@ -1,6 +1,6 @@
 package com.epf.persistance.repository;
 
-import com.epf.model.Plants;
+import com.epf.core.model.Plants;
 import com.epf.persistance.dao.PlantsDAO;
 
 import org.springframework.stereotype.Repository;

@@ -1,4 +1,4 @@
-package com.epf.model;
+package com.epf.core.model;
 
 public enum Effects {
     NORMAL, SLOW_LOW;

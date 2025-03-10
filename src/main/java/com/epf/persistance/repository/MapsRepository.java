@@ -1,7 +1,6 @@
-
 package com.epf.persistance.repository;
 
-import com.epf.model.Maps;
+import com.epf.core.model.Maps;
 import com.epf.persistance.dao.MapsDAO;
 
 import org.springframework.stereotype.Repository;

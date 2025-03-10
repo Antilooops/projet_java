@@ -1,7 +1,7 @@
 package com.epf.persistance.dao;
 
-import com.epf.model.Plants;
-import com.epf.model.Effects;
+import com.epf.core.model.Plants;
+import com.epf.core.model.Effects;
 
 import java.sql.SQLException;
 import java.sql.ResultSet;

@@ -1,10 +1,11 @@
 package com.epf.persistance.dao;
 
-import com.epf.model.Maps;
+import com.epf.core.model.Maps;
 
 import java.sql.SQLException;
 import java.sql.ResultSet;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
