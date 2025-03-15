@@ -1,4 +1,4 @@
-package com.epf.config;
+package com.epf.persistance.config;
 
 import javax.sql.DataSource;
 
@@ -11,7 +11,7 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 @Configuration
 @ComponentScan(basePackages = "com.epf")
-public class DBConfig {
+public class JDBConfig {
     @Value("${spring.datasource.url}")
     private String dbUrl;
 
