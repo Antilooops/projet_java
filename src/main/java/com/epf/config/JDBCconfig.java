@@ -1,4 +1,4 @@
-package com.epf.persistance.config;
+package com.epf.config;
 
 import javax.sql.DataSource;
 
@@ -11,26 +11,14 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 @Configuration
 @ComponentScan(basePackages = "com.epf")
-public class JDBConfig {
-    @Value("${spring.datasource.url}")
-    private String dbUrl;
-
-    @Value("${spring.datasource.username}")
-    private String dbUsername;
-
-    @Value("${spring.datasource.password}")
-    private String dbPassword;
-
-    @Value("${spring.datasource.driver-class-name}")
-    private String dbDriverClassName;
-
+public class JDBCconfig {
     @Bean
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName(dbDriverClassName);
-        dataSource.setUrl(dbUrl);
-        dataSource.setUsername(dbUsername);
-        dataSource.setPassword(dbPassword);
+        dataSource.setDriverClassName("org.mariadb.jdbc.Driver");
+        dataSource.setUrl("jdbc:mariadb://localhost:3306/pvz");
+        dataSource.setUsername("louis");
+        dataSource.setPassword("Okayletsgo123");
         return dataSource;
     }
 
