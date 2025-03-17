@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.ResultSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -42,12 +43,25 @@ public class PlantsDAO {
 
     public List<PlantsEntity> getAllPlants() {
         String sql = "SELECT * FROM Plante";
-        return jdbcTemplate.query(sql, new PlantRowMapper());
+        try {
+            return jdbcTemplate.query(sql, new PlantRowMapper());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public PlantsEntity getPlantById(int id) {
         String sql = "SELECT * FROM Plante WHERE id_plante=?";
-        List<PlantsEntity> plants = jdbcTemplate.query(sql, new PlantRowMapper(), id);
-        return plants.isEmpty() ? null : plants.get(0);
+        try {
+            List<PlantsEntity> plants = jdbcTemplate.query(sql, new PlantRowMapper(), id);
+            if (plants.isEmpty()) {
+                throw new RuntimeException("ERROR = plant with ID " + id + " not found.");
+            }
+            return plants.get(0);
+        } catch (DataAccessException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }
