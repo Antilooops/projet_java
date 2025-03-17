@@ -100,4 +100,12 @@ public class PlantsEntity {
     public void setImagePath(String imagePath) {
         this.imagePath = imagePath;
     }
+
+    @Override
+    public String toString() {
+        return "PlantsEntity{\n    id=" + this.id + "\n    name=" + this.name + "\n    healthPoints=" +
+                        this.healthPoints + "\n    attackPerSecond=" + this.attackPerSecond + "\n    attackDamage=" +
+                        this.attackDamage + "\n    price=" + this.price + "\n    sunPerSecond=" + this.sunPerSecond +
+                        "\n    effect=" + this.effect + "\n    imagePath=" + this.imagePath + "\n}";
+    }
 }
