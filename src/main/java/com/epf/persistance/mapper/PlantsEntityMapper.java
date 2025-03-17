@@ -24,7 +24,7 @@ public class PlantsEntityMapper {
         return plants;
     }
 
-    public List<Plants> mapListPlantsEntityToListPlantsModel(List<PlantsEntity> plantsEntities) {
+    public List<Plants> mapListPlantsEntitiesToListPlantsModels(List<PlantsEntity> plantsEntities) {
         if (plantsEntities == null) {
             return null;
         }
