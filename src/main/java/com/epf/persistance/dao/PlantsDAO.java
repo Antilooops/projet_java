@@ -1,11 +1,12 @@
 package com.epf.persistance.dao;
 
-import com.epf.core.model.Plants;
+import com.epf.persistance.entity.PlantsEntity;
 import com.epf.core.model.Effects;
 
 import java.sql.SQLException;
 import java.sql.ResultSet;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -15,16 +16,18 @@ import java.util.Optional;
 
 @Repository
 public class PlantsDAO {
+
     private final JdbcTemplate jdbcTemplate;
 
+    @Autowired
     public PlantsDAO(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    private static class PlantRowMapper implements RowMapper<Plants> {
+    private static class PlantRowMapper implements RowMapper<PlantsEntity> {
         @Override
-        public Plants mapRow(ResultSet rs, int rowNum) throws SQLException {
-            return new Plants(
+        public PlantsEntity mapRow(ResultSet rs, int rowNum) throws SQLException {
+            return new PlantsEntity(
                             rs.getInt("id_plante"),
                             rs.getString("nom"),
                             rs.getInt("point_de_vie"),
@@ -37,14 +40,14 @@ public class PlantsDAO {
         }
     }
 
-    public List<Plants> getAllPlants() {
-        String sql = "SELECT * FROM plants";
+    public List<PlantsEntity> getAllPlants() {
+        String sql = "SELECT * FROM Plante";
         return jdbcTemplate.query(sql, new PlantRowMapper());
     }
 
-    public Optional<Plants> getPlantById(int id) {
-        String sql = "SELECT * FROM plants WHERE id_plante=?";
-        List<Plants> plants = jdbcTemplate.query(sql, new PlantRowMapper(), id);
-        return plants.stream().findFirst();
+    public PlantsEntity getPlantById(int id) {
+        String sql = "SELECT * FROM Plante WHERE id_plante=?";
+        List<PlantsEntity> plants = jdbcTemplate.query(sql, new PlantRowMapper(), id);
+        return plants.isEmpty() ? null : plants.get(0);
     }
 }
