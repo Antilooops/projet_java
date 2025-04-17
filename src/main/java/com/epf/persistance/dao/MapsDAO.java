@@ -1,7 +1,5 @@
 package com.epf.persistance.dao;
 
-import com.epf.core.model.Maps;
-
 import java.sql.SQLException;
 import java.sql.ResultSet;
 
@@ -13,18 +11,22 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
+import com.epf.persistance.entity.MapsEntity;
+
 @Repository
 public class MapsDAO {
+
     private final JdbcTemplate jdbcTemplate;
 
+    @Autowired
     public MapsDAO(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    private static class MapsRowMapper implements RowMapper<Maps> {
+    private static class MapsRowMapper implements RowMapper<MapsEntity> {
         @Override
-        public Maps mapRow(ResultSet rs, int rowNum) throws SQLException {
-            return new Maps(
+        public MapsEntity mapRow(ResultSet rs, int rowNum) throws SQLException {
+            return new MapsEntity(
                             rs.getInt("id_map"),
                             rs.getInt("ligne"),
                             rs.getInt("colonne"),
@@ -32,14 +34,14 @@ public class MapsDAO {
         }
     }
 
-    public List<Maps> getAllMaps() {
-        String sql = "SELECT * FROM maps";
+    public List<MapsEntity> findMapsAll() {
+        String sql = "SELECT * FROM Map";
         return jdbcTemplate.query(sql, new MapsRowMapper());
     }
 
-    public Optional<Maps> getMapsById(int id) {
-        String sql = "SELECT * FROM maps WHERE id_map=?";
-        List<Maps> maps = jdbcTemplate.query(sql, new MapsRowMapper(), id);
-        return maps.stream().findFirst();
+    public MapsEntity findMapsById(int id) {
+        String sql = "SELECT * FROM Map WHERE id_map=?";
+        List<MapsEntity> maps = jdbcTemplate.query(sql, new MapsRowMapper(), id);
+        return maps.isEmpty() ? null : maps.get(0);
     }
 }
