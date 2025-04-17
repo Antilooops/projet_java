@@ -103,9 +103,9 @@ public class PlantsEntity {
 
     @Override
     public String toString() {
-        return "PlantsEntity{\n    id=" + this.id + "\n    name=" + this.name + "\n    healthPoints=" +
-                        this.healthPoints + "\n    attackPerSecond=" + this.attackPerSecond + "\n    attackDamage=" +
-                        this.attackDamage + "\n    price=" + this.price + "\n    sunPerSecond=" + this.sunPerSecond +
-                        "\n    effect=" + this.effect + "\n    imagePath=" + this.imagePath + "\n}";
+        return "PlantsEntity : id=" + this.id + ", name=" + this.name + ", healthPoints=" +
+                        this.healthPoints + ", attackPerSecond=" + this.attackPerSecond + ", attackDamage=" +
+                        this.attackDamage + ", price=" + this.price + ", sunPerSecond=" + this.sunPerSecond +
+                        ", effect=" + this.effect + ", imagePath=" + this.imagePath;
     }
 }

@@ -44,7 +44,7 @@ public class PlantsDAO {
         }
     }
 
-    public List<PlantsEntity> getAllPlants() {
+    public List<PlantsEntity> getPlantsAll() {
         String sql = "SELECT * FROM Plante";
         try {
             List<PlantsEntity> plantList = jdbcTemplate.query(sql, new PlantRowMapper());

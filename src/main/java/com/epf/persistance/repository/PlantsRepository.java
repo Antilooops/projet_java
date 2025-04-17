@@ -21,11 +21,11 @@ public class PlantsRepository {
         this.plantsMapper = plantsEntityMapper;
     }
 
-    public List<Plants> getAllPlants() {
-        return plantsMapper.mapListPlantsEntitiesToListPlantsModels(plantsDAO.getAllPlants());
+    public List<Plants> getPlantsAll() {
+        return plantsMapper.mapListEntitiesToListModels(plantsDAO.getPlantsAll());
     }
 
-    public Plants getPlantByID(int id) {
-        return plantsMapper.mapPlantEntityToPlantModel(plantsDAO.getPlantById(id));
+    public Plants getPlantById(int id) {
+        return plantsMapper.mapPlantEntitytoModel(plantsDAO.getPlantById(id));
     }
 }

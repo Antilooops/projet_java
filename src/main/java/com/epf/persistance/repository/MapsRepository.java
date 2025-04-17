@@ -22,11 +22,11 @@ public class MapsRepository {
         this.mapsMapper = mapsEntityMapper;
     }
 
-    public List<Maps> findMapsAll() {
-        return this.mapsMapper.mapListEntityToListModel(this.mapsDAO.findMapsAll());
+    public List<Maps> getMapsAll() {
+        return this.mapsMapper.mapListEntitiesToListModels(this.mapsDAO.getMapsAll());
     }
 
-    public Maps findMapsById(int id) {
-        return this.mapsMapper.mapEntityToModel(this.mapsDAO.findMapsById(id));
+    public Maps getMapsById(int id) {
+        return this.mapsMapper.mapEntityToModel(this.mapsDAO.getMapById(id));
     }
 }

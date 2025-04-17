@@ -22,7 +22,10 @@ public class MapsEntityMapper {
         return maps;
     }
 
-    public List<Maps> mapListEntityToListModel(List<MapsEntity> entities) {
+    public List<Maps> mapListEntitiesToListModels(List<MapsEntity> entities) {
+        if (entities == null) {
+            return null;
+        }
         return entities.stream()
                         .map(this::mapEntityToModel)
                         .toList();

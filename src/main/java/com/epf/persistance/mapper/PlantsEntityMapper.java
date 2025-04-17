@@ -10,34 +10,29 @@ import org.springframework.stereotype.Component;
 @Component
 public class PlantsEntityMapper {
 
-    public Plants fromPlantEntitytoModel(PlantsEntity plantsEntity) {
+    public Plants mapPlantEntitytoModel(PlantsEntity entity) {
+        if (entity == null) {
+            return null;
+        }
         Plants plants = new Plants();
-        plants.setId(plantsEntity.getId());
-        plants.setName(plantsEntity.getName());
-        plants.setHealthPoints(plantsEntity.getHealthPoints());
-        plants.setAttackPerSecond(plantsEntity.getAttackPerSecond());
-        plants.setAttackDamage(plantsEntity.getAttackDamage());
-        plants.setPrice(plantsEntity.getPrice());
-        plants.setSunPerSecond(plantsEntity.getSunPerSecond());
-        plants.setEffect(plantsEntity.getEffect());
-        plants.setImagePath(plantsEntity.getImagePath());
+        plants.setId(entity.getId());
+        plants.setName(entity.getName());
+        plants.setHealthPoints(entity.getHealthPoints());
+        plants.setAttackPerSecond(entity.getAttackPerSecond());
+        plants.setAttackDamage(entity.getAttackDamage());
+        plants.setPrice(entity.getPrice());
+        plants.setSunPerSecond(entity.getSunPerSecond());
+        plants.setEffect(entity.getEffect());
+        plants.setImagePath(entity.getImagePath());
         return plants;
     }
 
-    public List<Plants> mapListPlantsEntitiesToListPlantsModels(List<PlantsEntity> plantsEntities) {
-        if (plantsEntities == null) {
+    public List<Plants> mapListEntitiesToListModels(List<PlantsEntity> entities) {
+        if (entities == null) {
             return null;
         }
-        return plantsEntities.stream()
-                        .map(this::fromPlantEntitytoModel)
+        return entities.stream()
+                        .map(this::mapPlantEntitytoModel)
                         .toList();
-    }
-
-    public Plants mapPlantEntityToPlantModel(PlantsEntity plantEntity) {
-        if (plantEntity == null) {
-            return null;
-        } else {
-            return fromPlantEntitytoModel(plantEntity);
-        }
     }
 }
