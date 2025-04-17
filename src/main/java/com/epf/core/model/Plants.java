@@ -4,7 +4,7 @@ public class Plants {
     private int id;
     private String name;
     private int healthPoints;
-    private float attackPerSecond;
+    private float attackRate;
     private int attackDamage;
     private int price;
     private float sunPerSecond;
@@ -14,12 +14,12 @@ public class Plants {
     public Plants() {
     }
 
-    public Plants(int id, String name, int healthPoints, float attackPerSecond, int attackDamage, int price,
+    public Plants(int id, String name, int healthPoints, float attackRate, int attackDamage, int price,
                     float sunPerSecond, Effects effect, String imagePath) {
         this.id = id;
         this.name = name;
         this.healthPoints = healthPoints;
-        this.attackPerSecond = attackPerSecond;
+        this.attackRate = attackRate;
         this.attackDamage = attackDamage;
         this.price = price;
         this.sunPerSecond = sunPerSecond;
@@ -51,12 +51,12 @@ public class Plants {
         this.healthPoints = healthPoints;
     }
 
-    public float getAttackPerSecond() {
-        return attackPerSecond;
+    public float getAttackRate() {
+        return attackRate;
     }
 
-    public void setAttackPerSecond(float attackPerSecond) {
-        this.attackPerSecond = attackPerSecond;
+    public void setAttackRate(float attackRate) {
+        this.attackRate = attackRate;
     }
 
     public int getAttackDamage() {
@@ -101,9 +101,9 @@ public class Plants {
 
     @Override
     public String toString() {
-        return "Plants : id=" + this.id + ", name=" + this.name + ", healthPoints=" +
-                        this.healthPoints + ", attackPerSecond=" + this.attackPerSecond + ", attackDamage=" +
-                        this.attackDamage + ", price=" + this.price + ", sunPerSecond=" + this.sunPerSecond +
-                        ", effect=" + this.effect + ", imagePath=" + this.imagePath;
+        return "Plants : id=" + this.id + ", name=" + this.name + ", healthpoints=" +
+                        this.healthPoints + ", attackrate=" + this.attackRate + ", attackdamage=" +
+                        this.attackDamage + ", price=" + this.price + ", sunpersecond=" + this.sunPerSecond +
+                        ", effect=" + this.effect + ", imagepath=" + this.imagePath;
     }
 }

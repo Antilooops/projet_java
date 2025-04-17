@@ -3,14 +3,10 @@ package com.epf;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import com.epf.config.JDBCconfig;
-import com.epf.core.model.Maps;
-import com.epf.persistance.dao.MapsDAO;
-import com.epf.persistance.mapper.MapsEntityMapper;
-import com.epf.persistance.repository.MapsRepository;
-import com.epf.core.model.Plants;
-import com.epf.persistance.dao.PlantsDAO;
-import com.epf.persistance.mapper.PlantsEntityMapper;
-import com.epf.persistance.repository.PlantsRepository;
+import com.epf.core.model.*;
+import com.epf.persistance.dao.*;
+import com.epf.persistance.mapper.*;
+import com.epf.persistance.repository.*;
 
 import java.util.List;
 
@@ -37,6 +33,17 @@ public class Main {
         System.out.println("-------\n");
         for (Plants plants : plantList) {
             System.out.println(plants.toString());
+        }
+
+        System.out.println("-------\n");
+
+        ZombiesDAO zombiesDAO = context.getBean(ZombiesDAO.class);
+        ZombiesEntityMapper zombiesMapper = context.getBean(ZombiesEntityMapper.class);
+        ZombiesRepository zombiesRepo = new ZombiesRepository(zombiesDAO, zombiesMapper);
+        List<Zombies> zombieList = zombiesRepo.getZombiesAll();
+        System.out.println("-------\n");
+        for (Zombies zombies : zombieList) {
+            System.out.println(zombies.toString());
         }
 
         System.out.println("-------\n");

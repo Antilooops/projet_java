@@ -50,7 +50,7 @@ public class Maps {
 
     @Override
     public String toString() {
-        return "Maps : id = " + this.id + ", rows = " + this.rows + ", columns = " + this.columns +
-                        ", imagepath = " + this.imagePath;
+        return "Maps : id=" + this.id + ", rows=" + this.rows + ", columns=" + this.columns +
+                        ", imagepath=" + this.imagePath;
     }
 }

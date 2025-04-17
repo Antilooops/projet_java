@@ -26,7 +26,7 @@ public class MapsRepository {
         return this.mapsMapper.mapListEntitiesToListModels(this.mapsDAO.getMapsAll());
     }
 
-    public Maps getMapsById(int id) {
+    public Maps getMapById(int id) {
         return this.mapsMapper.mapEntityToModel(this.mapsDAO.getMapById(id));
     }
 }

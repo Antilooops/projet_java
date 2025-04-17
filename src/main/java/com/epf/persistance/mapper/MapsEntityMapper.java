@@ -14,20 +14,18 @@ public class MapsEntityMapper {
         if (entity == null) {
             return null;
         }
-        Maps maps = new Maps();
-        maps.setId(entity.getId());
-        maps.setRows(entity.getRows());
-        maps.setColumns(entity.getColumns());
-        maps.setImagePath(entity.getImagePath());
-        return maps;
+        Maps map = new Maps();
+        map.setId(entity.getId());
+        map.setRows(entity.getRows());
+        map.setColumns(entity.getColumns());
+        map.setImagePath(entity.getImagePath());
+        return map;
     }
 
     public List<Maps> mapListEntitiesToListModels(List<MapsEntity> entities) {
         if (entities == null) {
             return null;
         }
-        return entities.stream()
-                        .map(this::mapEntityToModel)
-                        .toList();
+        return entities.stream().map(this::mapEntityToModel).toList();
     }
 }

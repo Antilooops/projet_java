@@ -14,25 +14,23 @@ public class PlantsEntityMapper {
         if (entity == null) {
             return null;
         }
-        Plants plants = new Plants();
-        plants.setId(entity.getId());
-        plants.setName(entity.getName());
-        plants.setHealthPoints(entity.getHealthPoints());
-        plants.setAttackPerSecond(entity.getAttackPerSecond());
-        plants.setAttackDamage(entity.getAttackDamage());
-        plants.setPrice(entity.getPrice());
-        plants.setSunPerSecond(entity.getSunPerSecond());
-        plants.setEffect(entity.getEffect());
-        plants.setImagePath(entity.getImagePath());
-        return plants;
+        Plants plant = new Plants();
+        plant.setId(entity.getId());
+        plant.setName(entity.getName());
+        plant.setHealthPoints(entity.getHealthPoints());
+        plant.setAttackRate(entity.getAttackRate());
+        plant.setAttackDamage(entity.getAttackDamage());
+        plant.setPrice(entity.getPrice());
+        plant.setSunPerSecond(entity.getSunPerSecond());
+        plant.setEffect(entity.getEffect());
+        plant.setImagePath(entity.getImagePath());
+        return plant;
     }
 
     public List<Plants> mapListEntitiesToListModels(List<PlantsEntity> entities) {
         if (entities == null) {
             return null;
         }
-        return entities.stream()
-                        .map(this::mapPlantEntitytoModel)
-                        .toList();
+        return entities.stream().map(this::mapPlantEntitytoModel).toList();
     }
 }

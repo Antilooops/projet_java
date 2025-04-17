@@ -1,32 +1,28 @@
 package com.epf.persistance.entity;
 
-import com.epf.core.model.Effects;
-
-public class PlantsEntity {
+public class ZombiesEntity {
     private int id;
     private String name;
     private int healthPoints;
     private float attackRate;
     private int attackDamage;
-    private int price;
-    private float sunPerSecond;
-    private Effects effect;
+    private float movementSpeed;
     private String imagePath;
+    private int mapId;
 
-    public PlantsEntity() {
+    public ZombiesEntity() {
     }
 
-    public PlantsEntity(int id, String name, int healthPoints, float attackRate, int attackDamage, int price,
-                    float sunPerSecond, Effects effect, String imagePath) {
+    public ZombiesEntity(int id, String name, int healthPoints, float attackRate, int attackDamage, float movementSpeed,
+                    String imagePath, int mapId) {
         this.id = id;
         this.name = name;
         this.healthPoints = healthPoints;
         this.attackRate = attackRate;
         this.attackDamage = attackDamage;
-        this.price = price;
-        this.sunPerSecond = sunPerSecond;
-        this.effect = effect;
+        this.movementSpeed = movementSpeed;
         this.imagePath = imagePath;
+        this.mapId = mapId;
     }
 
     public int getId() {
@@ -69,28 +65,12 @@ public class PlantsEntity {
         this.attackDamage = attackDamage;
     }
 
-    public int getPrice() {
-        return price;
+    public float getMovementSpeed() {
+        return movementSpeed;
     }
 
-    public void setPrice(int price) {
-        this.price = price;
-    }
-
-    public float getSunPerSecond() {
-        return sunPerSecond;
-    }
-
-    public void setSunPerSecond(float sunPerSecond) {
-        this.sunPerSecond = sunPerSecond;
-    }
-
-    public Effects getEffect() {
-        return effect;
-    }
-
-    public void setEffect(Effects effect) {
-        this.effect = effect;
+    public void setMovementSpeed(float movementSpeed) {
+        this.movementSpeed = movementSpeed;
     }
 
     public String getImagePath() {
@@ -101,11 +81,19 @@ public class PlantsEntity {
         this.imagePath = imagePath;
     }
 
+    public int getMapId() {
+        return mapId;
+    }
+
+    public void setMapId(int mapId) {
+        this.mapId = mapId;
+    }
+
     @Override
     public String toString() {
-        return "PlantsEntity : id=" + this.id + ", name=" + this.name + ", healthpoints=" +
-                        this.healthPoints + ", attackrate=" + this.attackRate + ", attackdamage=" +
-                        this.attackDamage + ", price=" + this.price + ", sunpersecond=" + this.sunPerSecond +
-                        ", effect=" + this.effect + ", imagepath=" + this.imagePath;
+        return "ZombiesEntity : id=" + this.id + ", name=" + this.name + ", healthpoints=" + this.healthPoints +
+                        ", attackrate=" + this.attackRate + ", attackdamage=" + this.attackDamage + ", movementspeed=" +
+                        this.movementSpeed + ", imagepath=" + this.imagePath + ", mapid=" + this.mapId;
     }
+
 }
