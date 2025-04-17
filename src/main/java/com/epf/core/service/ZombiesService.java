@@ -2,27 +2,27 @@ package com.epf.core.service;
 
 import java.util.List;
 
-import com.epf.core.model.Maps;
-import com.epf.persistance.repository.MapsRepository;
+import com.epf.core.model.Zombies;
+import com.epf.persistance.repository.ZombiesRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class MapsService {
+public class ZombiesService {
 
-    private final MapsRepository repository;
+    private final ZombiesRepository repository;
 
     @Autowired
-    public MapsService(MapsRepository repository) {
+    public ZombiesService(ZombiesRepository repository) {
         this.repository = repository;
     }
 
-    public List<Maps> findAll() {
+    public List<Zombies> findAll() {
         return repository.getAll();
     }
 
-    public Maps findById(int id) {
+    public Zombies findById(int id) {
         return repository.getById(id);
     }
 }

@@ -12,20 +12,20 @@ import java.util.List;
 @Repository
 public class PlantsRepository {
 
-    private final PlantsDAO plantsDAO;
-    private final PlantsEntityMapper plantsMapper;
+    private final PlantsDAO dao;
+    private final PlantsEntityMapper entityMapper;
 
     @Autowired
-    public PlantsRepository(PlantsDAO plantsDAO, PlantsEntityMapper plantsEntityMapper) {
-        this.plantsDAO = plantsDAO;
-        this.plantsMapper = plantsEntityMapper;
+    public PlantsRepository(PlantsDAO dao, PlantsEntityMapper entityMapper) {
+        this.dao = dao;
+        this.entityMapper = entityMapper;
     }
 
-    public List<Plants> getPlantsAll() {
-        return plantsMapper.mapListEntitiesToListModels(plantsDAO.getPlantsAll());
+    public List<Plants> getAll() {
+        return entityMapper.mapListEntitiesToListModels(dao.getAll());
     }
 
-    public Plants getPlantById(int id) {
-        return plantsMapper.mapPlantEntitytoModel(plantsDAO.getPlantById(id));
+    public Plants getById(int id) {
+        return entityMapper.mapPlantEntitytoModel(dao.getById(id));
     }
 }

@@ -36,12 +36,12 @@ public class ZombiesDAO {
         }
     }
 
-    public List<ZombiesEntity> getZombiesAll() {
+    public List<ZombiesEntity> getAll() {
         String sql = "SELECT * FROM Zombie";
         return jdbcTemplate.query(sql, new ZombiesRowMapper());
     }
 
-    public ZombiesEntity getZombieById(int id) {
+    public ZombiesEntity getById(int id) {
         String sql = "SELECT * FROM Zombie WHERE id_zombie=?";
         List<ZombiesEntity> zombies = jdbcTemplate.query(sql, new ZombiesRowMapper(), id);
         return zombies.isEmpty() ? null : zombies.get(0);

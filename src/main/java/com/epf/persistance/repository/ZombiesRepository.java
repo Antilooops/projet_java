@@ -13,20 +13,20 @@ import java.util.Optional;
 @Repository
 public class ZombiesRepository {
 
-    private final ZombiesDAO zombiesDAO;
-    private final ZombiesEntityMapper zombiesMapper;
+    private final ZombiesDAO dao;
+    private final ZombiesEntityMapper entityMapper;
 
     @Autowired
-    public ZombiesRepository(ZombiesDAO zombiesDAO, ZombiesEntityMapper zombiesEntityMapper) {
-        this.zombiesDAO = zombiesDAO;
-        this.zombiesMapper = zombiesEntityMapper;
+    public ZombiesRepository(ZombiesDAO dao, ZombiesEntityMapper entityMapper) {
+        this.dao = dao;
+        this.entityMapper = entityMapper;
     }
 
-    public List<Zombies> getZombiesAll() {
-        return this.zombiesMapper.mapListEntitiesToListModels(this.zombiesDAO.getZombiesAll());
+    public List<Zombies> getAll() {
+        return this.entityMapper.mapListEntitiesToListModels(this.dao.getAll());
     }
 
-    public Zombies getZombieById(int id) {
-        return this.zombiesMapper.mapEntityToModel(this.zombiesDAO.getZombieById(id));
+    public Zombies getById(int id) {
+        return this.entityMapper.mapEntityToModel(this.dao.getById(id));
     }
 }

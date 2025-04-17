@@ -2,27 +2,27 @@ package com.epf.core.service;
 
 import java.util.List;
 
-import com.epf.core.model.Maps;
-import com.epf.persistance.repository.MapsRepository;
+import com.epf.core.model.Plants;
+import com.epf.persistance.repository.PlantsRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class MapsService {
+public class PlantsService {
 
-    private final MapsRepository repository;
+    private final PlantsRepository repository;
 
     @Autowired
-    public MapsService(MapsRepository repository) {
+    public PlantsService(PlantsRepository repository) {
         this.repository = repository;
     }
 
-    public List<Maps> findAll() {
+    public List<Plants> findAll() {
         return repository.getAll();
     }
 
-    public Maps findById(int id) {
+    public Plants findById(int id) {
         return repository.getById(id);
     }
 }

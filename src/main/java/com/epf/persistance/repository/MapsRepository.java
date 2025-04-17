@@ -13,20 +13,20 @@ import java.util.Optional;
 @Repository
 public class MapsRepository {
 
-    private final MapsDAO mapsDAO;
-    private final MapsEntityMapper mapsMapper;
+    private final MapsDAO dao;
+    private final MapsEntityMapper entityMapper;
 
     @Autowired
-    public MapsRepository(MapsDAO mapsDAO, MapsEntityMapper mapsEntityMapper) {
-        this.mapsDAO = mapsDAO;
-        this.mapsMapper = mapsEntityMapper;
+    public MapsRepository(MapsDAO dao, MapsEntityMapper entityMapper) {
+        this.dao = dao;
+        this.entityMapper = entityMapper;
     }
 
-    public List<Maps> getMapsAll() {
-        return this.mapsMapper.mapListEntitiesToListModels(this.mapsDAO.getMapsAll());
+    public List<Maps> getAll() {
+        return this.entityMapper.mapListEntitiesToListModels(this.dao.getAll());
     }
 
-    public Maps getMapById(int id) {
-        return this.mapsMapper.mapEntityToModel(this.mapsDAO.getMapById(id));
+    public Maps getById(int id) {
+        return this.entityMapper.mapEntityToModel(this.dao.getById(id));
     }
 }

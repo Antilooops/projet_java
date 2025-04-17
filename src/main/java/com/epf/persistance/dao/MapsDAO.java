@@ -34,12 +34,12 @@ public class MapsDAO {
         }
     }
 
-    public List<MapsEntity> getMapsAll() {
+    public List<MapsEntity> getAll() {
         String sql = "SELECT * FROM Map";
         return jdbcTemplate.query(sql, new MapsRowMapper());
     }
 
-    public MapsEntity getMapById(int id) {
+    public MapsEntity getById(int id) {
         String sql = "SELECT * FROM Map WHERE id_map=?";
         List<MapsEntity> maps = jdbcTemplate.query(sql, new MapsRowMapper(), id);
         return maps.isEmpty() ? null : maps.get(0);
