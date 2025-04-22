@@ -50,7 +50,7 @@ public class MapsDTO {
 
     @Override
     public String toString() {
-        return "Maps : id=" + this.id + ", rows=" + this.rows + ", columns=" + this.columns +
+        return "MapsDTO : id=" + this.id + ", rows=" + this.rows + ", columns=" + this.columns +
                         ", imagepath=" + this.imagePath;
     }
 }

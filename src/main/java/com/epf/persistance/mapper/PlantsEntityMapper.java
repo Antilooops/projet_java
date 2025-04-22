@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class PlantsEntityMapper {
 
-    public Plants mapPlantEntitytoModel(PlantsEntity entity) {
+    public Plants mapEntityToModel(PlantsEntity entity) {
         if (entity == null) {
             return null;
         }
@@ -31,6 +31,6 @@ public class PlantsEntityMapper {
         if (entities == null) {
             return null;
         }
-        return entities.stream().map(this::mapPlantEntitytoModel).toList();
+        return entities.stream().map(this::mapEntityToModel).toList();
     }
 }
