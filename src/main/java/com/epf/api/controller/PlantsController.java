@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/plants")
+@RequestMapping("/plantes")
 public class PlantsController {
 
     private final PlantsService service;
@@ -30,16 +30,22 @@ public class PlantsController {
 
     @GetMapping
     public List<PlantsDTO> getAllPlants() {
-        List<Plants> maps = service.findAll();
-        return dtoMapper.mapListModelsToListDTOs(maps);
+        List<Plants> plants = service.findAll();
+        return dtoMapper.mapListModelsToListDTOs(plants);
+    }
+
+    @GetMapping("/validation")
+    public List<PlantsDTO> validationPlants() {
+        List<Plants> plants = service.findAll();
+        return dtoMapper.mapListModelsToListDTOs(plants);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<PlantsDTO> getPlantsById(@PathVariable int id) {
-        Plants map = service.findById(id);
-        if (map == null) {
+        Plants plant = service.findById(id);
+        if (plant == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(dtoMapper.mapModelToDTO(map), HttpStatus.OK);
+        return new ResponseEntity<>(dtoMapper.mapModelToDTO(plant), HttpStatus.OK);
     }
 }

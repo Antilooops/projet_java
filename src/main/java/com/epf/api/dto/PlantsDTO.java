@@ -1,16 +1,26 @@
 package com.epf.api.dto;
 
 import com.epf.core.model.Effects;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class PlantsDTO {
+    @JsonProperty("id_plante")
     private int id;
+    @JsonProperty("nom")
     private String name;
+    @JsonProperty("point_de_vie")
     private int healthPoints;
+    @JsonProperty("attaque_par_seconde")
     private float attackRate;
+    @JsonProperty("degat_attaque")
     private int attackDamage;
+    @JsonProperty("cout")
     private int price;
+    @JsonProperty("soleil_par_seconde")
     private float sunPerSecond;
+    @JsonProperty("effet")
     private Effects effect;
+    @JsonProperty("chemin_image")
     private String imagePath;
 
     public PlantsDTO() {
@@ -103,7 +113,7 @@ public class PlantsDTO {
 
     @Override
     public String toString() {
-        return "PlantsDTO : id=" + this.id + ", name=" + this.name + ", healthpoints=" +
+        return "Plants : id=" + this.id + ", name=" + this.name + ", healthpoints=" +
                         this.healthPoints + ", attackrate=" + this.attackRate + ", attackdamage=" +
                         this.attackDamage + ", price=" + this.price + ", sunpersecond=" + this.sunPerSecond +
                         ", effect=" + this.effect + ", imagepath=" + this.imagePath;

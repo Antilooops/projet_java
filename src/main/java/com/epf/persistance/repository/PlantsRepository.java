@@ -26,6 +26,6 @@ public class PlantsRepository {
     }
 
     public Plants getById(int id) {
-        return entityMapper.mapPlantEntitytoModel(dao.getById(id));
+        return entityMapper.mapEntityToModel(dao.getById(id));
     }
 }

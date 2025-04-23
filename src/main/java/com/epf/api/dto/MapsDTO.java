@@ -1,9 +1,15 @@
 package com.epf.api.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class MapsDTO {
+    @JsonProperty("id_map")
     private int id;
+    @JsonProperty("ligne")
     private int rows;
+    @JsonProperty("colonne")
     private int columns;
+    @JsonProperty("chemin_image")
     private String imagePath;
 
     public MapsDTO() {

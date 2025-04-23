@@ -34,6 +34,12 @@ public class MapsController {
         return dtoMapper.mapListModelsToListDTOs(maps);
     }
 
+    @GetMapping("/validation")
+    public List<MapsDTO> validationMaps() {
+        List<Maps> maps = service.findAll();
+        return dtoMapper.mapListModelsToListDTOs(maps);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<MapsDTO> getMapsById(@PathVariable int id) {
         Maps map = service.findById(id);
