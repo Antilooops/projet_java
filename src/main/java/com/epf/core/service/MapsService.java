@@ -22,7 +22,7 @@ public class MapsService {
         return repository.getAll();
     }
 
-    public Maps findById(int id) {
-        return repository.getById(id);
+    public int create(Maps model) {
+        return repository.add(model);
     }
 }

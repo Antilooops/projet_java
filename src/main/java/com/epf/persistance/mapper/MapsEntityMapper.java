@@ -14,12 +14,24 @@ public class MapsEntityMapper {
         if (entity == null) {
             return null;
         }
-        Maps map = new Maps();
-        map.setId(entity.getId());
-        map.setRows(entity.getRows());
-        map.setColumns(entity.getColumns());
-        map.setImagePath(entity.getImagePath());
-        return map;
+        Maps model = new Maps();
+        model.setId(entity.getId());
+        model.setRows(entity.getRows());
+        model.setColumns(entity.getColumns());
+        model.setImagePath(entity.getImagePath());
+        return model;
+    }
+
+    public MapsEntity mapModelToEntity(Maps model) {
+        if (model == null) {
+            return null;
+        }
+        MapsEntity entity = new MapsEntity();
+        entity.setId(model.getId());
+        entity.setRows(model.getRows());
+        entity.setColumns(model.getColumns());
+        entity.setImagePath(model.getImagePath());
+        return entity;
     }
 
     public List<Maps> mapListEntitiesToListModels(List<MapsEntity> entities) {

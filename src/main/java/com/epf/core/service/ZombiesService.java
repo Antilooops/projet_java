@@ -22,7 +22,7 @@ public class ZombiesService {
         return repository.getAll();
     }
 
-    public Zombies findById(int id) {
-        return repository.getById(id);
+    public int create(Zombies model) {
+        return repository.add(model);
     }
 }

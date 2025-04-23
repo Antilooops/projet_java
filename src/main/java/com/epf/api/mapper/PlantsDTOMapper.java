@@ -9,27 +9,44 @@ import org.springframework.stereotype.Component;
 @Component
 public class PlantsDTOMapper {
 
-    public PlantsDTO mapModelToDTO(Plants plant) {
-        if (plant == null) {
+    public PlantsDTO mapModelToDTO(Plants model) {
+        if (model == null) {
             return null;
         }
         PlantsDTO dto = new PlantsDTO();
-        dto.setId(plant.getId());
-        dto.setName(plant.getName());
-        dto.setHealthPoints(plant.getHealthPoints());
-        dto.setAttackRate(plant.getAttackRate());
-        dto.setAttackDamage(plant.getAttackDamage());
-        dto.setPrice(plant.getPrice());
-        dto.setSunPerSecond(plant.getSunPerSecond());
-        dto.setEffect(plant.getEffect());
-        dto.setImagePath(plant.getImagePath());
+        dto.setId(model.getId());
+        dto.setName(model.getName());
+        dto.setHealthPoints(model.getHealthPoints());
+        dto.setAttackRate(model.getAttackRate());
+        dto.setAttackDamage(model.getAttackDamage());
+        dto.setPrice(model.getPrice());
+        dto.setSunPerSecond(model.getSunPerSecond());
+        dto.setEffect(model.getEffect());
+        dto.setImagePath(model.getImagePath());
         return dto;
     }
 
-    public List<PlantsDTO> mapListModelsToListDTOs(List<Plants> plants) {
-        if (plants == null) {
+    public Plants mapDTOToModel(PlantsDTO dto) {
+        if (dto == null) {
             return null;
         }
-        return plants.stream().map(this::mapModelToDTO).toList();
+        Plants model = new Plants();
+        model.setId(dto.getId());
+        model.setName(dto.getName());
+        model.setHealthPoints(dto.getHealthPoints());
+        model.setAttackRate(dto.getAttackRate());
+        model.setAttackDamage(dto.getAttackDamage());
+        model.setPrice(dto.getPrice());
+        model.setSunPerSecond(dto.getSunPerSecond());
+        model.setEffect(dto.getEffect());
+        model.setImagePath(dto.getImagePath());
+        return model;
+    }
+
+    public List<PlantsDTO> mapListModelsToListDTOs(List<Plants> models) {
+        if (models == null) {
+            return null;
+        }
+        return models.stream().map(this::mapModelToDTO).toList();
     }
 }

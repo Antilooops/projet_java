@@ -22,7 +22,7 @@ public class PlantsService {
         return repository.getAll();
     }
 
-    public Plants findById(int id) {
-        return repository.getById(id);
+    public int create(Plants model) {
+        return repository.add(model);
     }
 }

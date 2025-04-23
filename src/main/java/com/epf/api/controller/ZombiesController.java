@@ -1,6 +1,8 @@
 package com.epf.api.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.epf.api.dto.ZombiesDTO;
 import com.epf.api.mapper.ZombiesDTOMapper;
@@ -12,6 +14,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,22 +34,26 @@ public class ZombiesController {
 
     @GetMapping()
     public List<ZombiesDTO> getAllZombies() {
-        List<Zombies> zombies = service.findAll();
-        return dtoMapper.mapListModelsToListDTOs(zombies);
+        List<Zombies> models = service.findAll();
+        return dtoMapper.mapListModelsToListDTOs(models);
     }
 
     @GetMapping("/validation")
     public List<ZombiesDTO> validationZombies() {
-        List<Zombies> zombies = service.findAll();
-        return dtoMapper.mapListModelsToListDTOs(zombies);
+        List<Zombies> models = service.findAll();
+        return dtoMapper.mapListModelsToListDTOs(models);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<ZombiesDTO> getZombiesById(@PathVariable int id) {
-        Zombies zombie = service.findById(id);
-        if (zombie == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    @PostMapping
+    public ResponseEntity<Map<String, Object>> createZombie(@RequestBody ZombiesDTO dto) {
+        try {
+            Zombies model = dtoMapper.mapDTOToModel(dto);
+            int id = service.create(model);
+            Map<String, Object> response = new HashMap<>();
+            response.put("id", id);
+            return new ResponseEntity<>(response, HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<>(dtoMapper.mapModelToDTO(zombie), HttpStatus.OK);
     }
 }

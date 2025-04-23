@@ -38,9 +38,11 @@ public class MapsDAO {
         return jdbcTemplate.query(sql, new MapsRowMapper());
     }
 
-    public MapsEntity getById(int id) {
-        String sql = "SELECT * FROM Map WHERE id_map=?";
-        List<MapsEntity> maps = jdbcTemplate.query(sql, new MapsRowMapper(), id);
-        return maps.isEmpty() ? null : maps.get(0);
+    public int add(MapsEntity entity) {
+        String sql = "INSERT INTO Map (ligne, colonne, chemin_image) VALUES (?, ?, ?)";
+        jdbcTemplate.query(sql, new MapsRowMapper(), entity.getRows(), entity.getColumns(), entity.getImagePath());
+        sql = "SELECT * FROM Map ORDER BY id_map DESC LIMIT 1";
+        List<MapsEntity> result = jdbcTemplate.query(sql, new MapsRowMapper());
+        return result.isEmpty() ? null : result.get(0).getId();
     }
 }

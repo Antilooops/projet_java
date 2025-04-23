@@ -9,26 +9,42 @@ import org.springframework.stereotype.Component;
 @Component
 public class ZombiesDTOMapper {
 
-    public ZombiesDTO mapModelToDTO(Zombies zombie) {
-        if (zombie == null) {
+    public ZombiesDTO mapModelToDTO(Zombies model) {
+        if (model == null) {
             return null;
         }
         ZombiesDTO dto = new ZombiesDTO();
-        dto.setId(zombie.getId());
-        dto.setName(zombie.getName());
-        dto.setHealthPoints(zombie.getHealthPoints());
-        dto.setAttackRate(zombie.getAttackRate());
-        dto.setAttackDamage(zombie.getAttackDamage());
-        dto.setMovementSpeed(zombie.getMovementSpeed());
-        dto.setImagePath(zombie.getImagePath());
-        dto.setMapId(zombie.getMapId());
+        dto.setId(model.getId());
+        dto.setName(model.getName());
+        dto.setHealthPoints(model.getHealthPoints());
+        dto.setAttackRate(model.getAttackRate());
+        dto.setAttackDamage(model.getAttackDamage());
+        dto.setMovementSpeed(model.getMovementSpeed());
+        dto.setImagePath(model.getImagePath());
+        dto.setMapId(model.getMapId());
         return dto;
     }
 
-    public List<ZombiesDTO> mapListModelsToListDTOs(List<Zombies> zombies) {
-        if (zombies == null) {
+    public Zombies mapDTOToModel(ZombiesDTO dto) {
+        if (dto == null) {
             return null;
         }
-        return zombies.stream().map(this::mapModelToDTO).toList();
+        Zombies model = new Zombies();
+        model.setId(dto.getId());
+        model.setName(dto.getName());
+        model.setHealthPoints(dto.getHealthPoints());
+        model.setAttackRate(dto.getAttackRate());
+        model.setAttackDamage(dto.getAttackDamage());
+        model.setMovementSpeed(dto.getMovementSpeed());
+        model.setImagePath(dto.getImagePath());
+        model.setMapId(dto.getMapId());
+        return model;
+    }
+
+    public List<ZombiesDTO> mapListModelsToListDTOs(List<Zombies> models) {
+        if (models == null) {
+            return null;
+        }
+        return models.stream().map(this::mapModelToDTO).toList();
     }
 }

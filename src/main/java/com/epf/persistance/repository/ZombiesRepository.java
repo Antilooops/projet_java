@@ -2,6 +2,7 @@ package com.epf.persistance.repository;
 
 import com.epf.core.model.Zombies;
 import com.epf.persistance.dao.ZombiesDAO;
+import com.epf.persistance.entity.ZombiesEntity;
 import com.epf.persistance.mapper.ZombiesEntityMapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,8 @@ public class ZombiesRepository {
         return this.entityMapper.mapListEntitiesToListModels(this.dao.getAll());
     }
 
-    public Zombies getById(int id) {
-        return this.entityMapper.mapEntityToModel(this.dao.getById(id));
+    public int add(Zombies model) {
+        ZombiesEntity entity = this.entityMapper.mapModelToEntity(model);
+        return dao.add(entity);
     }
 }

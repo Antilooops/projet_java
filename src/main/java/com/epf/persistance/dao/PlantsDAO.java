@@ -44,9 +44,13 @@ public class PlantsDAO {
         return jdbcTemplate.query(sql, new PlantRowMapper());
     }
 
-    public PlantsEntity getById(int id) {
-        String sql = "SELECT * FROM Plante WHERE id_plante=?";
-        List<PlantsEntity> plantes = jdbcTemplate.query(sql, new PlantRowMapper(), id);
-        return plantes.isEmpty() ? null : plantes.get(0);
+    public int add(PlantsEntity entity) {
+        String sql = "INSERT INTO Plante (nom, point_de_vie, attaque_par_seconde, degat_attaque, cout, soleil_par_seconde, effet, chemin_image) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        jdbcTemplate.query(sql, new PlantRowMapper(), entity.getId(), entity.getHealthPoints(), entity.getAttackRate(),
+                        entity.getAttackDamage(), entity.getPrice(), entity.getSunPerSecond(), entity.getEffect()
+                                        .name(), entity.getImagePath());
+        sql = "SELECT * FROM Plante ORDER BY id_plante DESC LIMIT 1";
+        List<PlantsEntity> result = jdbcTemplate.query(sql, new PlantRowMapper());
+        return result.isEmpty() ? null : result.get(0).getId();
     }
 }

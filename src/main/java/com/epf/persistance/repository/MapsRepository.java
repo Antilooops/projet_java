@@ -2,6 +2,7 @@ package com.epf.persistance.repository;
 
 import com.epf.core.model.Maps;
 import com.epf.persistance.dao.MapsDAO;
+import com.epf.persistance.entity.MapsEntity;
 import com.epf.persistance.mapper.MapsEntityMapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,8 @@ public class MapsRepository {
         return this.entityMapper.mapListEntitiesToListModels(this.dao.getAll());
     }
 
-    public Maps getById(int id) {
-        return this.entityMapper.mapEntityToModel(this.dao.getById(id));
+    public int add(Maps model) {
+        MapsEntity entity = this.entityMapper.mapModelToEntity(model);
+        return dao.add(entity);
     }
 }

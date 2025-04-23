@@ -41,9 +41,13 @@ public class ZombiesDAO {
         return jdbcTemplate.query(sql, new ZombiesRowMapper());
     }
 
-    public ZombiesEntity getById(int id) {
-        String sql = "SELECT * FROM Zombie WHERE id_zombie=?";
-        List<ZombiesEntity> zombies = jdbcTemplate.query(sql, new ZombiesRowMapper(), id);
-        return zombies.isEmpty() ? null : zombies.get(0);
+    public int add(ZombiesEntity entity) {
+        String sql = "INSERT INTO Zombie (nom, point_de_vie, attaque_par_seconde, degat_attaque, vitesse_de_deplacement, chemin_image, id_map) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        jdbcTemplate.query(sql, new ZombiesRowMapper(), entity.getId(), entity.getHealthPoints(), entity
+                        .getAttackRate(), entity.getAttackDamage(), entity.getMovementSpeed(), entity.getImagePath(),
+                        entity.getMapId());
+        sql = "SELECT * FROM Zombie ORDER BY id_zombie DESC LIMIT 1";
+        List<ZombiesEntity> result = jdbcTemplate.query(sql, new ZombiesRowMapper());
+        return result.isEmpty() ? null : result.get(0).getId();
     }
 }
