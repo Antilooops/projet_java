@@ -37,6 +37,16 @@ public class ZombiesDAO {
         }
     }
 
+    public boolean checkId(int id) {
+        String sql = "SELECT * FROM Zombie WHERE id_zombie = ?";
+        List<ZombiesEntity> result = jdbcTemplate.query(sql, new ZombiesRowMapper(), id);
+        if (result.isEmpty()) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     public List<ZombiesEntity> getAll() throws EmptyDataException {
         String sql = "SELECT * FROM Zombie";
         List<ZombiesEntity> result = jdbcTemplate.query(sql, new ZombiesRowMapper());
@@ -49,8 +59,13 @@ public class ZombiesDAO {
 
     public int add(ZombiesEntity entity) throws EmptyDataException {
         String sql = "INSERT INTO Zombie (nom, point_de_vie, attaque_par_seconde, degat_attaque, vitesse_de_deplacement, chemin_image, id_map) VALUES (?, ?, ?, ?, ?, ?, ?)";
-        jdbcTemplate.query(sql, new ZombiesRowMapper(), entity.getId(), entity.getHealthPoints(), entity
-                        .getAttackRate(), entity.getAttackDamage(), entity.getMovementSpeed(), entity.getImagePath(),
+        jdbcTemplate.query(sql, new ZombiesRowMapper(),
+                        entity.getName(),
+                        entity.getHealthPoints(),
+                        entity.getAttackRate(),
+                        entity.getAttackDamage(),
+                        entity.getMovementSpeed(),
+                        entity.getImagePath(),
                         entity.getMapId());
         sql = "SELECT * FROM Zombie ORDER BY id_zombie DESC LIMIT 1";
         List<ZombiesEntity> result = jdbcTemplate.query(sql, new ZombiesRowMapper());
@@ -61,9 +76,21 @@ public class ZombiesDAO {
         }
     }
 
-    public int delete(int id) {
+    public void update(ZombiesEntity entity) throws EmptyDataException {
+        String sql = "UPDATE Zombie SET nom = ?, point_de_vie = ?, attaque_par_seconde = ?, degat_attaque = ?, vitesse_de_deplacement = ?, chemin_image = ?, id_map = ? WHERE id_zombie = ?";
+        jdbcTemplate.update(sql,
+                        entity.getName(),
+                        entity.getHealthPoints(),
+                        entity.getAttackRate(),
+                        entity.getAttackDamage(),
+                        entity.getMovementSpeed(),
+                        entity.getImagePath(),
+                        entity.getMapId(),
+                        entity.getId());
+    }
+
+    public void delete(int id) {
         String sql = "DELETE FROM Zombie WHERE id_zombie = ?";
-        int zombiesRowAffected = jdbcTemplate.update(sql, id);
-        return zombiesRowAffected;
+        jdbcTemplate.update(sql, id);
     }
 }

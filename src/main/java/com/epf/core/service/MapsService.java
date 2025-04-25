@@ -1,8 +1,8 @@
 package com.epf.core.service;
 
 import java.util.List;
-import java.util.Map;
 
+import com.epf.core.exception.BadAttributeException;
 import com.epf.core.model.Maps;
 import com.epf.persistance.repository.MapsRepository;
 
@@ -27,7 +27,15 @@ public class MapsService {
         return repository.add(model);
     }
 
-    public Map<String, Integer> remove(int id) {
-        return repository.delete(id);
+    public void modify(Maps model) {
+        if (!repository.checkId(model.getId())) {
+            throw new BadAttributeException("Given id in URL doesn't correspond to any existing map id.");
+        } else {
+            repository.update(model);
+        }
+    }
+
+    public void remove(int id) {
+        repository.delete(id);
     }
 }

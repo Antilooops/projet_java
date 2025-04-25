@@ -30,11 +30,15 @@ public class Plants {
     }
 
     public int getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(int id) {
-        this.id = id;
+        if (id < 0) {
+            throw new BadAttributeException("Id not set correctly. Cannot be less than 0.");
+        } else {
+            this.id = id;
+        }
     }
 
     public String getName() {
@@ -52,7 +56,7 @@ public class Plants {
     }
 
     public int getHealthPoints() {
-        return healthPoints;
+        return this.healthPoints;
     }
 
     public void setHealthPoints(int healthPoints) throws BadAttributeException {
@@ -64,7 +68,7 @@ public class Plants {
     }
 
     public float getAttackRate() {
-        return attackRate;
+        return this.attackRate;
     }
 
     public void setAttackRate(float attackRate) throws BadAttributeException {
@@ -76,7 +80,7 @@ public class Plants {
     }
 
     public int getAttackDamage() {
-        return attackDamage;
+        return this.attackDamage;
     }
 
     public void setAttackDamage(int attackDamage) throws BadAttributeException {
@@ -88,7 +92,7 @@ public class Plants {
     }
 
     public int getPrice() {
-        return price;
+        return this.price;
     }
 
     public void setPrice(int price) throws BadAttributeException {
@@ -100,7 +104,7 @@ public class Plants {
     }
 
     public float getSunPerSecond() {
-        return sunPerSecond;
+        return this.sunPerSecond;
     }
 
     public void setSunPerSecond(float sunPerSecond) throws BadAttributeException {
@@ -112,7 +116,7 @@ public class Plants {
     }
 
     public Effects getEffect() {
-        return effect;
+        return this.effect;
     }
 
     public void setEffect(Effects effect) throws BadAttributeException {
@@ -120,14 +124,14 @@ public class Plants {
     }
 
     public String getImagePath() {
-        return imagePath;
+        return this.imagePath;
     }
 
     public void setImagePath(String imagePath) throws BadAttributeException {
-        if (imagePath.length() > 255) {
-            throw new BadAttributeException("Name not set correctly. Name to long.");
-        } else {
+        if (imagePath == null || imagePath.length() <= 255) {
             this.imagePath = imagePath;
+        } else {
+            throw new BadAttributeException("Name not set correctly. Name to long.");
         }
     }
 

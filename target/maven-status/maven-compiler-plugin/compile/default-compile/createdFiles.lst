@@ -15,7 +15,6 @@ com/epf/persistance/entity/MapsEntity.class
 com/epf/core/service/ZombiesService.class
 com/epf/persistance/repository/MapsRepository.class
 com/epf/core/model/Maps.class
-com/epf/persistance/dao/PlantsDAO$PlantRowMapper.class
 com/epf/persistance/entity/ZombiesEntity.class
 com/epf/persistance/dao/PlantsDAO.class
 com/epf/persistance/exception/EmptyDataException.class
@@ -30,6 +29,7 @@ com/epf/core/service/MapsService.class
 com/epf/core/exception/BadAttributeException.class
 com/epf/api/dto/PlantsDTO.class
 com/epf/persistance/mapper/ZombiesEntityMapper.class
+com/epf/persistance/dao/PlantsDAO$PlantsRowMapper.class
 com/epf/config/WebAppInit.class
 com/epf/persistance/dao/MapsDAO.class
 com/epf/persistance/mapper/MapsEntityMapper.class

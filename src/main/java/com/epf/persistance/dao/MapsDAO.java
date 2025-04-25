@@ -8,9 +8,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import com.epf.persistance.entity.MapsEntity;
 import com.epf.persistance.exception.EmptyDataException;
@@ -36,6 +34,16 @@ public class MapsDAO {
         }
     }
 
+    public boolean checkId(int id) {
+        String sql = "SELECT * FROM Map WHERE id_map = ?";
+        List<MapsEntity> result = jdbcTemplate.query(sql, new MapsRowMapper(), id);
+        if (result.isEmpty()) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     public List<MapsEntity> getAll() throws EmptyDataException {
         String sql = "SELECT * FROM Map";
         List<MapsEntity> result = jdbcTemplate.query(sql, new MapsRowMapper());
@@ -48,7 +56,10 @@ public class MapsDAO {
 
     public int add(MapsEntity entity) throws EmptyDataException {
         String sql = "INSERT INTO Map (ligne, colonne, chemin_image) VALUES (?, ?, ?)";
-        jdbcTemplate.query(sql, new MapsRowMapper(), entity.getRows(), entity.getColumns(), entity.getImagePath());
+        jdbcTemplate.query(sql, new MapsRowMapper(),
+                        entity.getRows(),
+                        entity.getColumns(),
+                        entity.getImagePath());
         sql = "SELECT * FROM Map ORDER BY id_map DESC LIMIT 1";
         List<MapsEntity> result = jdbcTemplate.query(sql, new MapsRowMapper());
         if (result.isEmpty()) {
@@ -58,14 +69,19 @@ public class MapsDAO {
         }
     }
 
-    public Map<String, Integer> delete(int id) {
+    public void update(MapsEntity entity) throws EmptyDataException {
+        String sql = "UPDATE Map SET ligne = ?, colonne = ?, chemin_image = ? WHERE id_map = ?";
+        jdbcTemplate.update(sql,
+                        entity.getRows(),
+                        entity.getColumns(),
+                        entity.getImagePath(),
+                        entity.getId());
+    }
+
+    public void delete(int id) {
         String sql = "UPDATE Zombie SET id_map = NULL WHERE id_map = ?";
-        int zombiesRowAffected = jdbcTemplate.update(sql, id);
+        jdbcTemplate.update(sql, id);
         sql = "DELETE FROM Map WHERE id_map = ?";
-        int mapsRowAffected = jdbcTemplate.update(sql, id);
-        Map<String, Integer> rowsAffected = new HashMap<>();
-        rowsAffected.put("maps", mapsRowAffected);
-        rowsAffected.put("zombies", zombiesRowAffected);
-        return rowsAffected;
+        jdbcTemplate.update(sql, id);
     }
 }

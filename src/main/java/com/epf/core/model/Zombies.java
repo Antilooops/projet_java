@@ -31,8 +31,12 @@ public class Zombies {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(int id) throws BadAttributeException {
+        if (id < 0) {
+            throw new BadAttributeException("Id not set correctly. Cannot be less than 0.");
+        } else {
+            this.id = id;
+        }
     }
 
     public String getName() {
@@ -102,10 +106,10 @@ public class Zombies {
     }
 
     public void setImagePath(String imagePath) throws BadAttributeException {
-        if (imagePath.length() > 255) {
-            throw new BadAttributeException("Name not set correctly. Name to long.");
-        } else {
+        if (imagePath == null || imagePath.length() <= 255) {
             this.imagePath = imagePath;
+        } else {
+            throw new BadAttributeException("Name not set correctly. Name to long.");
         }
     }
 
@@ -114,7 +118,11 @@ public class Zombies {
     }
 
     public void setMapId(int mapId) {
-        this.mapId = mapId;
+        if (mapId < 0) {
+            throw new BadAttributeException("Mapid not set correctly. Cannot be less than 0.");
+        } else {
+            this.mapId = mapId;
+        }
     }
 
     @Override

@@ -2,6 +2,7 @@ package com.epf.core.service;
 
 import java.util.List;
 
+import com.epf.core.exception.BadAttributeException;
 import com.epf.core.model.Plants;
 import com.epf.persistance.repository.PlantsRepository;
 
@@ -26,7 +27,15 @@ public class PlantsService {
         return repository.add(model);
     }
 
-    public int remove(int id) {
-        return repository.delete(id);
+    public void modify(Plants model) {
+        if (!repository.checkId(model.getId())) {
+            throw new BadAttributeException("Given id in URL doesn't correspond to any existing map id.");
+        } else {
+            repository.update(model);
+        }
+    }
+
+    public void remove(int id) {
+        repository.delete(id);
     }
 }

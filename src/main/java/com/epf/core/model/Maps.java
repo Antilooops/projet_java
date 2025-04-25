@@ -19,11 +19,11 @@ public class Maps {
     }
 
     public int getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(int id) throws BadAttributeException {
-        if (rows < 0) {
+        if (id < 0) {
             throw new BadAttributeException("Id not set correctly. Cannot be less than 0.");
         } else {
             this.id = id;
@@ -31,7 +31,7 @@ public class Maps {
     }
 
     public int getRows() {
-        return rows;
+        return this.rows;
     }
 
     public void setRows(int rows) throws BadAttributeException {
@@ -45,7 +45,7 @@ public class Maps {
     }
 
     public int getColumns() {
-        return columns;
+        return this.columns;
     }
 
     public void setColumns(int columns) throws BadAttributeException {
@@ -59,14 +59,14 @@ public class Maps {
     }
 
     public String getImagePath() {
-        return imagePath;
+        return this.imagePath;
     }
 
     public void setImagePath(String imagePath) throws BadAttributeException {
-        if (imagePath.length() > 255) {
-            throw new BadAttributeException("Name not set correctly. Name to long.");
-        } else {
+        if (imagePath == null || imagePath.length() <= 255) {
             this.imagePath = imagePath;
+        } else {
+            throw new BadAttributeException("Name not set correctly. Name to long.");
         }
     }
 

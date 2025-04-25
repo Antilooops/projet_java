@@ -2,7 +2,6 @@ package com.epf.persistance.repository;
 
 import com.epf.core.model.Plants;
 import com.epf.persistance.dao.PlantsDAO;
-import com.epf.persistance.entity.PlantsEntity;
 import com.epf.persistance.mapper.PlantsEntityMapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,16 +21,23 @@ public class PlantsRepository {
         this.entityMapper = entityMapper;
     }
 
+    public boolean checkId(int id) {
+        return this.dao.checkId(id);
+    }
+
     public List<Plants> getAll() {
         return this.entityMapper.mapListEntitiesToListModels(dao.getAll());
     }
 
     public int add(Plants model) {
-        PlantsEntity entity = this.entityMapper.mapModelToEntity(model);
-        return dao.add(entity);
+        return dao.add(this.entityMapper.mapModelToEntity(model));
     }
 
-    public int delete(int id) {
-        return dao.delete(id);
+    public void update(Plants model) {
+        dao.update(this.entityMapper.mapModelToEntity(model));
+    }
+
+    public void delete(int id) {
+        dao.delete(id);
     }
 }
