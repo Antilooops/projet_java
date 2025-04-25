@@ -5,12 +5,13 @@
 /home/louis/Documents/epf/4A/java/projet/projet_pvz/src/main/java/com/epf/api/dto/MapsDTO.java
 /home/louis/Documents/epf/4A/java/projet/projet_pvz/src/main/java/com/epf/api/dto/PlantsDTO.java
 /home/louis/Documents/epf/4A/java/projet/projet_pvz/src/main/java/com/epf/api/dto/ZombiesDTO.java
+/home/louis/Documents/epf/4A/java/projet/projet_pvz/src/main/java/com/epf/api/exception/BadPathVariableException.java
 /home/louis/Documents/epf/4A/java/projet/projet_pvz/src/main/java/com/epf/api/mapper/MapsDTOMapper.java
 /home/louis/Documents/epf/4A/java/projet/projet_pvz/src/main/java/com/epf/api/mapper/PlantsDTOMapper.java
 /home/louis/Documents/epf/4A/java/projet/projet_pvz/src/main/java/com/epf/api/mapper/ZombiesDTOMapper.java
 /home/louis/Documents/epf/4A/java/projet/projet_pvz/src/main/java/com/epf/config/JDBCconfig.java
 /home/louis/Documents/epf/4A/java/projet/projet_pvz/src/main/java/com/epf/config/WebAppInit.java
-/home/louis/Documents/epf/4A/java/projet/projet_pvz/src/main/java/com/epf/core/exception/BadAttributException.java
+/home/louis/Documents/epf/4A/java/projet/projet_pvz/src/main/java/com/epf/core/exception/BadAttributeException.java
 /home/louis/Documents/epf/4A/java/projet/projet_pvz/src/main/java/com/epf/core/model/Effects.java
 /home/louis/Documents/epf/4A/java/projet/projet_pvz/src/main/java/com/epf/core/model/Maps.java
 /home/louis/Documents/epf/4A/java/projet/projet_pvz/src/main/java/com/epf/core/model/Plants.java

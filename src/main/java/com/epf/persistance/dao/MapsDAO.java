@@ -4,7 +4,6 @@ import java.sql.SQLException;
 import java.sql.ResultSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -47,12 +46,16 @@ public class MapsDAO {
         }
     }
 
-    public int add(MapsEntity entity) {
+    public int add(MapsEntity entity) throws EmptyDataException {
         String sql = "INSERT INTO Map (ligne, colonne, chemin_image) VALUES (?, ?, ?)";
         jdbcTemplate.query(sql, new MapsRowMapper(), entity.getRows(), entity.getColumns(), entity.getImagePath());
         sql = "SELECT * FROM Map ORDER BY id_map DESC LIMIT 1";
         List<MapsEntity> result = jdbcTemplate.query(sql, new MapsRowMapper());
-        return result.isEmpty() ? null : result.get(0).getId();
+        if (result.isEmpty()) {
+            throw new EmptyDataException();
+        } else {
+            return result.get(0).getId();
+        }
     }
 
     public Map<String, Integer> delete(int id) {
@@ -61,7 +64,6 @@ public class MapsDAO {
         sql = "DELETE FROM Map WHERE id_map = ?";
         int mapsRowAffected = jdbcTemplate.update(sql, id);
         Map<String, Integer> rowsAffected = new HashMap<>();
-        rowsAffected.put("map_id", id);
         rowsAffected.put("maps", mapsRowAffected);
         rowsAffected.put("zombies", zombiesRowAffected);
         return rowsAffected;

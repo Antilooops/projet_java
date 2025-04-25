@@ -1,6 +1,6 @@
 package com.epf.core.model;
 
-import com.epf.core.exception.BadAttributException;
+import com.epf.core.exception.BadAttributeException;
 
 public enum Effects {
     NORMAL, SLOW_LOW, SLOW_MEDIUM, SLOW_STOP;
@@ -10,7 +10,7 @@ public enum Effects {
             String output = input.replace(" ", "_");
             return Effects.valueOf(output.toUpperCase());
         } catch (IllegalArgumentException e) {
-            throw new BadAttributException("Invalid Effect : " + input, e);
+            throw new BadAttributeException("Invalid Effect : " + input, e);
         }
     }
 
@@ -20,7 +20,7 @@ public enum Effects {
             output = output.replace("_", " ");
             return output.toLowerCase();
         } catch (IllegalArgumentException e) {
-            throw new BadAttributException("Invalid Effect : " + input, e);
+            throw new BadAttributeException("Invalid Effect : " + input, e);
         }
     }
 }

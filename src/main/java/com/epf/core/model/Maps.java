@@ -1,6 +1,6 @@
 package com.epf.core.model;
 
-import com.epf.core.exception.BadAttributException;
+import com.epf.core.exception.BadAttributeException;
 
 public class Maps {
     private int id;
@@ -22,19 +22,23 @@ public class Maps {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(int id) throws BadAttributeException {
+        if (rows < 0) {
+            throw new BadAttributeException("Id not set correctly. Cannot be less than 0.");
+        } else {
+            this.id = id;
+        }
     }
 
     public int getRows() {
         return rows;
     }
 
-    public void setRows(int rows) throws BadAttributException {
+    public void setRows(int rows) throws BadAttributeException {
         if (rows <= 0) {
-            throw new BadAttributException("Rows not set correctly. Cannot be less than or equal to 0.");
+            throw new BadAttributeException("Rows not set correctly. Cannot be less than or equal to 0.");
         } else if (rows > 15) {
-            throw new BadAttributException("Rows not set correctly. Cannot be more than 15.");
+            throw new BadAttributeException("Rows not set correctly. Cannot be more than 15.");
         } else {
             this.rows = rows;
         }
@@ -44,11 +48,11 @@ public class Maps {
         return columns;
     }
 
-    public void setColumns(int columns) throws BadAttributException {
+    public void setColumns(int columns) throws BadAttributeException {
         if (columns <= 5) {
-            throw new BadAttributException("Columns not set correctly. Cannot be less than or equal to 5.");
+            throw new BadAttributeException("Columns not set correctly. Cannot be less than or equal to 5.");
         } else if (columns > 20) {
-            throw new BadAttributException("Columns not set correctly. Cannot be more than 20.");
+            throw new BadAttributeException("Columns not set correctly. Cannot be more than 20.");
         } else {
             this.columns = columns;
         }
@@ -58,8 +62,12 @@ public class Maps {
         return imagePath;
     }
 
-    public void setImagePath(String imagePath) {
-        this.imagePath = imagePath;
+    public void setImagePath(String imagePath) throws BadAttributeException {
+        if (imagePath.length() > 255) {
+            throw new BadAttributeException("Name not set correctly. Name to long.");
+        } else {
+            this.imagePath = imagePath;
+        }
     }
 
     @Override

@@ -1,6 +1,6 @@
 package com.epf.core.model;
 
-import com.epf.core.exception.BadAttributException;
+import com.epf.core.exception.BadAttributeException;
 
 public class Plants {
     private int id;
@@ -41,11 +41,11 @@ public class Plants {
         return name;
     }
 
-    public void setName(String name) throws BadAttributException {
+    public void setName(String name) throws BadAttributeException {
         if (name == "") {
-            throw new BadAttributException("Name not set correctly. Cannot be empty.");
+            throw new BadAttributeException("Name not set correctly. Cannot be empty.");
         } else if (name.length() > 255) {
-            throw new BadAttributException("Name not set correctly. Name to long.");
+            throw new BadAttributeException("Name not set correctly. Name to long.");
         } else {
             this.name = name;
         }
@@ -55,9 +55,9 @@ public class Plants {
         return healthPoints;
     }
 
-    public void setHealthPoints(int healthPoints) throws BadAttributException {
+    public void setHealthPoints(int healthPoints) throws BadAttributeException {
         if (healthPoints <= 0) {
-            throw new BadAttributException("Healthpoints not set correctly. Cannot be less than or equal to 0.");
+            throw new BadAttributeException("Healthpoints not set correctly. Cannot be less than or equal to 0.");
         } else {
             this.healthPoints = healthPoints;
         }
@@ -67,9 +67,9 @@ public class Plants {
         return attackRate;
     }
 
-    public void setAttackRate(float attackRate) throws BadAttributException {
+    public void setAttackRate(float attackRate) throws BadAttributeException {
         if (attackRate < 0.0f) {
-            throw new BadAttributException("Attackrate not set correctly. Cannot be less than 0.0");
+            throw new BadAttributeException("Attackrate not set correctly. Cannot be less than 0.0");
         } else {
             this.attackRate = attackRate;
         }
@@ -79,9 +79,9 @@ public class Plants {
         return attackDamage;
     }
 
-    public void setAttackDamage(int attackDamage) throws BadAttributException {
+    public void setAttackDamage(int attackDamage) throws BadAttributeException {
         if (attackDamage < 0) {
-            throw new BadAttributException("Attackdamage not set correctly. Cannot be less than 0.");
+            throw new BadAttributeException("Attackdamage not set correctly. Cannot be less than 0.");
         } else {
             this.attackDamage = attackDamage;
         }
@@ -91,9 +91,9 @@ public class Plants {
         return price;
     }
 
-    public void setPrice(int price) throws BadAttributException {
+    public void setPrice(int price) throws BadAttributeException {
         if (price < 0) {
-            throw new BadAttributException("Price not set correctly. Cannot be less than 0.");
+            throw new BadAttributeException("Price not set correctly. Cannot be less than 0.");
         } else {
             this.price = price;
         }
@@ -103,9 +103,9 @@ public class Plants {
         return sunPerSecond;
     }
 
-    public void setSunPerSecond(float sunPerSecond) throws BadAttributException {
+    public void setSunPerSecond(float sunPerSecond) throws BadAttributeException {
         if (sunPerSecond < 0.0f) {
-            throw new BadAttributException("Sunpersecond not set correctly. Cannot be less than or equal to 0.0");
+            throw new BadAttributeException("Sunpersecond not set correctly. Cannot be less than or equal to 0.0");
         } else {
             this.sunPerSecond = sunPerSecond;
         }
@@ -115,7 +115,7 @@ public class Plants {
         return effect;
     }
 
-    public void setEffect(Effects effect) throws BadAttributException {
+    public void setEffect(Effects effect) throws BadAttributeException {
         this.effect = effect;
     }
 
@@ -123,8 +123,12 @@ public class Plants {
         return imagePath;
     }
 
-    public void setImagePath(String imagePath) {
-        this.imagePath = imagePath;
+    public void setImagePath(String imagePath) throws BadAttributeException {
+        if (imagePath.length() > 255) {
+            throw new BadAttributeException("Name not set correctly. Name to long.");
+        } else {
+            this.imagePath = imagePath;
+        }
     }
 
     @Override

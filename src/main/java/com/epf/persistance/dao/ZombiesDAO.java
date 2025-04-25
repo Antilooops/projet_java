@@ -37,7 +37,7 @@ public class ZombiesDAO {
         }
     }
 
-    public List<ZombiesEntity> getAll() {
+    public List<ZombiesEntity> getAll() throws EmptyDataException {
         String sql = "SELECT * FROM Zombie";
         List<ZombiesEntity> result = jdbcTemplate.query(sql, new ZombiesRowMapper());
         if (result.isEmpty()) {
@@ -47,18 +47,23 @@ public class ZombiesDAO {
         }
     }
 
-    public int add(ZombiesEntity entity) {
+    public int add(ZombiesEntity entity) throws EmptyDataException {
         String sql = "INSERT INTO Zombie (nom, point_de_vie, attaque_par_seconde, degat_attaque, vitesse_de_deplacement, chemin_image, id_map) VALUES (?, ?, ?, ?, ?, ?, ?)";
         jdbcTemplate.query(sql, new ZombiesRowMapper(), entity.getId(), entity.getHealthPoints(), entity
                         .getAttackRate(), entity.getAttackDamage(), entity.getMovementSpeed(), entity.getImagePath(),
                         entity.getMapId());
         sql = "SELECT * FROM Zombie ORDER BY id_zombie DESC LIMIT 1";
         List<ZombiesEntity> result = jdbcTemplate.query(sql, new ZombiesRowMapper());
-        return result.isEmpty() ? null : result.get(0).getId();
+        if (result.isEmpty()) {
+            throw new EmptyDataException();
+        } else {
+            return result.get(0).getId();
+        }
     }
 
     public int delete(int id) {
         String sql = "DELETE FROM Zombie WHERE id_zombie = ?";
-        return jdbcTemplate.update(sql, id);
+        int zombiesRowAffected = jdbcTemplate.update(sql, id);
+        return zombiesRowAffected;
     }
 }

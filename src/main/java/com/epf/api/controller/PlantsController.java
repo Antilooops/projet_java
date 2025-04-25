@@ -5,8 +5,9 @@ import java.util.List;
 import java.util.Map;
 
 import com.epf.api.dto.PlantsDTO;
+import com.epf.api.exception.BadPathVariableException;
 import com.epf.api.mapper.PlantsDTOMapper;
-import com.epf.core.exception.BadAttributException;
+import com.epf.core.exception.BadAttributeException;
 import com.epf.core.model.Plants;
 import com.epf.core.service.PlantsService;
 import com.epf.persistance.exception.EmptyDataException;
@@ -45,7 +46,7 @@ public class PlantsController {
             System.out.println(e);
             Map<String, Object> response = new HashMap<>();
             response.put("status", HttpStatus.NOT_FOUND.value());
-            response.put("message", "not found");
+            response.put("message", "no plant found");
             return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
         } catch (Exception e) {
             System.out.println(e);
@@ -63,14 +64,15 @@ public class PlantsController {
     }
 
     @PostMapping
-    public ResponseEntity<Map<String, Object>> createPlant(@RequestBody PlantsDTO dto) {
+    public ResponseEntity<Object> createPlant(@RequestBody PlantsDTO dto) {
         try {
             Plants model = dtoMapper.mapDTOToModel(dto);
             int id = service.create(model);
             Map<String, Object> response = new HashMap<>();
             response.put("id", id);
+            response.put("message", "plant created successfully");
             return new ResponseEntity<>(response, HttpStatus.CREATED);
-        } catch (BadAttributException e) {
+        } catch (BadAttributeException e) {
             System.out.println(e);
             Map<String, Object> response = new HashMap<>();
             response.put("status", HttpStatus.BAD_REQUEST.value());
@@ -88,13 +90,26 @@ public class PlantsController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Map<String, Object>> deletePlant(@PathVariable("id") int id) {
         try {
+            if (id < 0) {
+                throw new BadPathVariableException("Pathvariable cannot be negative");
+            }
             int rowsAffected = service.remove(id);
             Map<String, Object> response = new HashMap<>();
             response.put("id", id);
-            response.put("deleted", rowsAffected);
+            response.put("plant_deleted", rowsAffected);
             return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (BadPathVariableException e) {
+            System.out.println(e);
+            Map<String, Object> response = new HashMap<>();
+            response.put("status", HttpStatus.BAD_REQUEST.value());
+            response.put("message", e.getMessage());
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
         } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            System.out.println(e);
+            Map<String, Object> response = new HashMap<>();
+            response.put("status", HttpStatus.INTERNAL_SERVER_ERROR.value());
+            response.put("message", "internal server error");
+            return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }

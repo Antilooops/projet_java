@@ -1,5 +1,7 @@
 package com.epf.core.model;
 
+import com.epf.core.exception.BadAttributeException;
+
 public class Zombies {
     private int id;
     private String name;
@@ -37,48 +39,74 @@ public class Zombies {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setName(String name) throws BadAttributeException {
+        if (name == "") {
+            throw new BadAttributeException("Name not set correctly. Cannot be empty.");
+        } else if (name.length() > 255) {
+            throw new BadAttributeException("Name not set correctly. Name to long.");
+        } else {
+            this.name = name;
+        }
     }
 
     public int getHealthPoints() {
         return healthPoints;
     }
 
-    public void setHealthPoints(int healthPoints) {
-        this.healthPoints = healthPoints;
+    public void setHealthPoints(int healthPoints) throws BadAttributeException {
+        if (healthPoints <= 0) {
+            throw new BadAttributeException("Healthpoints not set correctly. Cannot be less than or equal to 0.");
+        } else {
+            this.healthPoints = healthPoints;
+        }
     }
 
     public float getAttackRate() {
         return attackRate;
     }
 
-    public void setAttackRate(float attackRate) {
-        this.attackRate = attackRate;
+    public void setAttackRate(float attackRate) throws BadAttributeException {
+        if (attackRate < 0.0f) {
+            throw new BadAttributeException("Attackrate not set correctly. Cannot be less than 0.0");
+        } else {
+            this.attackRate = attackRate;
+        }
     }
 
     public int getAttackDamage() {
         return attackDamage;
     }
 
-    public void setAttackDamage(int attackDamage) {
-        this.attackDamage = attackDamage;
+    public void setAttackDamage(int attackDamage) throws BadAttributeException {
+        if (attackDamage < 0) {
+            throw new BadAttributeException("Attackdamage not set correctly. Cannot be less than 0.");
+        } else {
+            this.attackDamage = attackDamage;
+        }
     }
 
     public float getMovementSpeed() {
         return movementSpeed;
     }
 
-    public void setMovementSpeed(float movementSpeed) {
-        this.movementSpeed = movementSpeed;
+    public void setMovementSpeed(float movementSpeed) throws BadAttributeException {
+        if (movementSpeed < 0.0f) {
+            throw new BadAttributeException("Movementspeed not set correctly. Cannot be less than 0.0");
+        } else {
+            this.movementSpeed = movementSpeed;
+        }
     }
 
     public String getImagePath() {
         return imagePath;
     }
 
-    public void setImagePath(String imagePath) {
-        this.imagePath = imagePath;
+    public void setImagePath(String imagePath) throws BadAttributeException {
+        if (imagePath.length() > 255) {
+            throw new BadAttributeException("Name not set correctly. Name to long.");
+        } else {
+            this.imagePath = imagePath;
+        }
     }
 
     public int getMapId() {

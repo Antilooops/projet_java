@@ -7,8 +7,8 @@ com/epf/core/model/Zombies.class
 com/epf/config/JDBCconfig.class
 com/epf/persistance/repository/PlantsRepository.class
 com/epf/persistance/entity/PlantsEntity.class
-com/epf/core/exception/BadAttributException.class
 com/epf/api/controller/ZombiesController.class
+com/epf/api/exception/BadPathVariableException.class
 com/epf/persistance/dao/ZombiesDAO$ZombiesRowMapper.class
 com/epf/api/dto/ZombiesDTO.class
 com/epf/persistance/entity/MapsEntity.class
@@ -27,6 +27,7 @@ com/epf/persistance/dao/MapsDAO$MapsRowMapper.class
 com/epf/persistance/repository/ZombiesRepository.class
 com/epf/core/model/Plants.class
 com/epf/core/service/MapsService.class
+com/epf/core/exception/BadAttributeException.class
 com/epf/api/dto/PlantsDTO.class
 com/epf/persistance/mapper/ZombiesEntityMapper.class
 com/epf/config/WebAppInit.class

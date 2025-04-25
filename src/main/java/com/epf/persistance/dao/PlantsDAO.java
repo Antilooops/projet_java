@@ -40,7 +40,7 @@ public class PlantsDAO {
         }
     }
 
-    public List<PlantsEntity> getAll() {
+    public List<PlantsEntity> getAll() throws EmptyDataException {
         String sql = "SELECT * FROM Plante";
         List<PlantsEntity> result = jdbcTemplate.query(sql, new PlantRowMapper());
         if (result.isEmpty()) {
@@ -50,18 +50,23 @@ public class PlantsDAO {
         }
     }
 
-    public int add(PlantsEntity entity) {
+    public int add(PlantsEntity entity) throws EmptyDataException {
         String sql = "INSERT INTO Plante (nom, point_de_vie, attaque_par_seconde, degat_attaque, cout, soleil_par_seconde, effet, chemin_image) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         jdbcTemplate.query(sql, new PlantRowMapper(), entity.getName(), entity.getHealthPoints(), entity
                         .getAttackRate(), entity.getAttackDamage(), entity.getPrice(), entity.getSunPerSecond(), Effects
                                         .intoString(entity.getEffect()), entity.getImagePath());
         sql = "SELECT * FROM Plante ORDER BY id_plante DESC LIMIT 1";
         List<PlantsEntity> result = jdbcTemplate.query(sql, new PlantRowMapper());
-        return result.isEmpty() ? null : result.get(0).getId();
+        if (result.isEmpty()) {
+            throw new EmptyDataException();
+        } else {
+            return result.get(0).getId();
+        }
     }
 
     public int delete(int id) {
         String sql = "DELETE FROM Plante WHERE id_plante = ?";
-        return jdbcTemplate.update(sql, id);
+        int plantsRowAffected = jdbcTemplate.update(sql, id);
+        return plantsRowAffected;
     }
 }

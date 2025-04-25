@@ -1,6 +1,5 @@
 package com.epf.api.dto;
 
-import com.epf.core.model.Effects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class PlantsDTO {
