@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class MapsRepository {
@@ -29,5 +30,9 @@ public class MapsRepository {
     public int add(Maps model) {
         MapsEntity entity = this.entityMapper.mapModelToEntity(model);
         return dao.add(entity);
+    }
+
+    public Map<String, Integer> delete(int id) {
+        return dao.delete(id);
     }
 }

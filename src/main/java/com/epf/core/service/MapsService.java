@@ -1,6 +1,7 @@
 package com.epf.core.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.epf.core.model.Maps;
 import com.epf.persistance.repository.MapsRepository;
@@ -24,5 +25,9 @@ public class MapsService {
 
     public int create(Maps model) {
         return repository.add(model);
+    }
+
+    public Map<String, Integer> remove(int id) {
+        return repository.delete(id);
     }
 }

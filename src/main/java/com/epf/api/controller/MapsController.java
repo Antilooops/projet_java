@@ -5,13 +5,16 @@ import java.util.List;
 import java.util.Map;
 
 import com.epf.api.dto.MapsDTO;
+import com.epf.core.exception.BadAttributException;
 import com.epf.api.mapper.MapsDTOMapper;
 import com.epf.core.model.Maps;
 import com.epf.core.service.MapsService;
+import com.epf.persistance.exception.EmptyDataException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,9 +36,24 @@ public class MapsController {
     }
 
     @GetMapping
-    public List<MapsDTO> getAllMaps() {
-        List<Maps> models = service.findAll();
-        return dtoMapper.mapListModelsToListDTOs(models);
+    public ResponseEntity<Object> getAllMaps() {
+        try {
+            List<Maps> models = service.findAll();
+            List<MapsDTO> dtos = dtoMapper.mapListModelsToListDTOs(models);
+            return ResponseEntity.ok(dtos);
+        } catch (EmptyDataException e) {
+            System.out.println(e);
+            Map<String, Object> response = new HashMap<>();
+            response.put("status", HttpStatus.NOT_FOUND.value());
+            response.put("message", "not found");
+            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            System.out.println(e);
+            Map<String, Object> response = new HashMap<>();
+            response.put("status", HttpStatus.INTERNAL_SERVER_ERROR.value());
+            response.put("message", "internal server error");
+            return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @GetMapping("/validation")
@@ -45,16 +63,39 @@ public class MapsController {
     }
 
     @PostMapping
-    public ResponseEntity<Map<String, Object>> createMap(@RequestBody MapsDTO dto) {
+    public ResponseEntity<Object> createMap(@RequestBody MapsDTO dto) {
         try {
             Maps model = dtoMapper.mapDTOToModel(dto);
             int id = service.create(model);
             Map<String, Object> response = new HashMap<>();
             response.put("id", id);
             return new ResponseEntity<>(response, HttpStatus.CREATED);
+        } catch (BadAttributException e) {
+            System.out.println(e);
+            Map<String, Object> response = new HashMap<>();
+            response.put("status", HttpStatus.BAD_REQUEST.value());
+            response.put("message", e.getMessage());
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        } catch (Exception e) {
+            System.out.println(e);
+            Map<String, Object> response = new HashMap<>();
+            response.put("status", HttpStatus.INTERNAL_SERVER_ERROR.value());
+            response.put("message", "internal server error");
+            return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Object> deleteMap(@PathVariable("id") int id) {
+        try {
+            Map<String, Integer> rowsAffected = service.remove(id);
+            Map<String, Object> response = new HashMap<>();
+            response.put("id", rowsAffected.get("map_id"));
+            response.put("maps_deleted", rowsAffected.get("maps"));
+            response.put("zombies_deleted", rowsAffected.get("zombies"));
+            return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
-
 }

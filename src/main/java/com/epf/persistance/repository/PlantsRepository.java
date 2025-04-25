@@ -30,4 +30,8 @@ public class PlantsRepository {
         PlantsEntity entity = this.entityMapper.mapModelToEntity(model);
         return dao.add(entity);
     }
+
+    public int delete(int id) {
+        return dao.delete(id);
+    }
 }

@@ -25,4 +25,8 @@ public class PlantsService {
     public int create(Plants model) {
         return repository.add(model);
     }
+
+    public int remove(int id) {
+        return repository.delete(id);
+    }
 }

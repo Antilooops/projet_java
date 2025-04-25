@@ -19,7 +19,7 @@ public class PlantsDTO {
     @JsonProperty("soleil_par_seconde")
     private float sunPerSecond;
     @JsonProperty("effet")
-    private Effects effect;
+    private String effect;
     @JsonProperty("chemin_image")
     private String imagePath;
 
@@ -27,7 +27,7 @@ public class PlantsDTO {
     }
 
     public PlantsDTO(int id, String name, int healthPoints, float attackRate, int attackDamage, int price,
-                    float sunPerSecond, Effects effect, String imagePath) {
+                    float sunPerSecond, String effect, String imagePath) {
         this.id = id;
         this.name = name;
         this.healthPoints = healthPoints;
@@ -95,11 +95,11 @@ public class PlantsDTO {
         this.sunPerSecond = sunPerSecond;
     }
 
-    public Effects getEffect() {
+    public String getEffect() {
         return effect;
     }
 
-    public void setEffect(Effects effect) {
+    public void setEffect(String effect) {
         this.effect = effect;
     }
 

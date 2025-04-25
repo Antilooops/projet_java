@@ -3,6 +3,7 @@ package com.epf.api.mapper;
 import java.util.List;
 
 import com.epf.api.dto.PlantsDTO;
+import com.epf.core.model.Effects;
 import com.epf.core.model.Plants;
 import org.springframework.stereotype.Component;
 
@@ -21,7 +22,7 @@ public class PlantsDTOMapper {
         dto.setAttackDamage(model.getAttackDamage());
         dto.setPrice(model.getPrice());
         dto.setSunPerSecond(model.getSunPerSecond());
-        dto.setEffect(model.getEffect());
+        dto.setEffect(Effects.intoString(model.getEffect()));
         dto.setImagePath(model.getImagePath());
         return dto;
     }
@@ -38,7 +39,7 @@ public class PlantsDTOMapper {
         model.setAttackDamage(dto.getAttackDamage());
         model.setPrice(dto.getPrice());
         model.setSunPerSecond(dto.getSunPerSecond());
-        model.setEffect(dto.getEffect());
+        model.setEffect(Effects.fromString(dto.getEffect()));
         model.setImagePath(dto.getImagePath());
         return model;
     }

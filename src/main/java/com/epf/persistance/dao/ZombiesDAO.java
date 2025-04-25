@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.epf.persistance.entity.ZombiesEntity;
+import com.epf.persistance.exception.EmptyDataException;
 
 @Repository
 public class ZombiesDAO {
@@ -38,7 +39,12 @@ public class ZombiesDAO {
 
     public List<ZombiesEntity> getAll() {
         String sql = "SELECT * FROM Zombie";
-        return jdbcTemplate.query(sql, new ZombiesRowMapper());
+        List<ZombiesEntity> result = jdbcTemplate.query(sql, new ZombiesRowMapper());
+        if (result.isEmpty()) {
+            throw new EmptyDataException();
+        } else {
+            return result;
+        }
     }
 
     public int add(ZombiesEntity entity) {
@@ -49,5 +55,10 @@ public class ZombiesDAO {
         sql = "SELECT * FROM Zombie ORDER BY id_zombie DESC LIMIT 1";
         List<ZombiesEntity> result = jdbcTemplate.query(sql, new ZombiesRowMapper());
         return result.isEmpty() ? null : result.get(0).getId();
+    }
+
+    public int delete(int id) {
+        String sql = "DELETE FROM Zombie WHERE id_zombie = ?";
+        return jdbcTemplate.update(sql, id);
     }
 }
