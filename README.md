@@ -12,7 +12,8 @@ To use the backend, please check that you have the following requirements :
 - Maven
 - Tomcat10
 - MariaDB
-  (<u>J'utilise Archlinux qui n'a pas MySQL dans son package manager. Je dois donc utiliser MariaDB qui est l'alternative que la distro propose. Voir: https://wiki.archlinux.org/title/MariaDB</u>)
+
+(J'utilise Archlinux qui n'a pas MySQL dans son package manager. Je dois donc utiliser MariaDB qui est l'alternative que la distro propose. Voir: https://wiki.archlinux.org/title/MariaDB)
 
 ## Technologies
 
@@ -25,26 +26,77 @@ Every dependencies can be found in the `pom.xml` file.
 
 ## API routes
 
+Calls to the backend should be done using : http://localhost:8080
+
 ### Plantes
 
-- `GET /plantes`
-- `GET /plantes/{id}`
-- `POST /plantes`
-- `PUT /plantes/{id}`
-- `DELETE /plantes/{id}`
+- GET `/plantes`
+- GET `/plantes/{id}`
+- POST `/plantes`
+- PUT `/plantes/{id}`
+- DELETE `/plantes/{id}`
 
 ### Zombies
 
-- `GET /zombies`
-- `GET /zombies/{id}`
-- `POST /zombies`
-- `PUT /zombies/{id}`
-- `DELETE /zombies/{id}`
+- GET `/zombies`
+- GET `/zombies/{id}`
+- POST `/zombies`
+- PUT `/zombies/{id}`
+- DELETE `/zombies/{id}`
 
 ### Maps
 
-- `GET /maps`
-- `GET /maps/{id}`
-- `POST /maps`
-- `PUT /maps/{id}`
-- `DELETE /maps/{id}`
+- GET `/maps`
+- GET `/maps/{id}`
+- POST `/maps`
+- PUT `/maps/{id}`
+- DELETE `/maps/{id}`
+
+## Notes
+
+### Global structure
+
+Because I wanted to learn how to do it the "proper way" I decided to not simplify the structure of the code. The final code structure is the following :
+
+```
+src/
+└── main/
+    ├── java/
+    │   └── com/
+    │       └── epf/
+    │           ├── api/
+    │           │   ├── controller/
+    │           │   │   └── ...
+    │           │   ├── dto/
+    │           │   │   └── ...
+    │           │   └── mapper/
+    │           │       └── ...
+    │           ├── config/
+    │           │   ├── JDBCconfig.java
+    │           │   └── WebAppInit.java
+    │           ├── core/
+    │           │   ├── exception/
+    │           │   │   └── ...
+    │           │   ├── model/
+    │           │   │   └── ...
+    │           │   └── service/
+    │           │       └── ...
+    │           └── persistance/
+    │               ├── dao/
+    │               │   └── ...
+    │               ├── entity/
+    │               │   └── ...
+    │               ├── exception/
+    │               │   └── ...
+    │               ├── mapper/
+    │               │   └── ...
+    │               └── repository/
+    │                   └── ...
+    ├── resources/
+    └── webapp/
+        └── WEB-INF/
+            ├── spring-config.xml
+            └── web.xml
+```
+
+### Error handling
