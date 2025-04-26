@@ -52,7 +52,7 @@ Calls to the backend should be done using : http://localhost:8080
 - PUT `/maps/{id}`
 - DELETE `/maps/{id}`
 
-## Notes
+## Notes and choices
 
 ### Global structure
 
@@ -100,5 +100,10 @@ src/
             ├── spring-config.xml
             └── web.xml
 ```
+
+### Data validation
+
+Validation of data is done mainly in the core layer. Incoming data from the controller is checked by the controller's getters or/and by services. DTOs serve as temporary containers to hold information just received by the backend. No check are made for wrong data format or else.
+Note that ids are checked differently: multiple steps are done at different moments to maintain data integrity. First, controllers (ones who require an id in the URL) check if the given id is negative. Then in services, a check is done in the database to see if the id exists or not.
 
 ### Error handling
